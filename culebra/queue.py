@@ -5,6 +5,9 @@ class Queue(object):
         self.file = None
         self._dof(self._init, 'a')
 
+    def size(self):
+        return self._dof(self._size)
+
     def top(self):
         return self._dof(self._top)
 
@@ -14,8 +17,8 @@ class Queue(object):
     def append(self, elem):
         return self._dof(self._append, 'a', str(elem))
 
-    def flush(self, elem):
-        raise NotImplementedError()
+    def flush(self):
+        self._dof(self._init, 'w')
 
     def __iter__(self):
         self._openf()
@@ -31,6 +34,9 @@ class Queue(object):
 
     def _init(self):
         return None
+
+    def _size(self):
+        return len(self.file.readline())
 
     def _top(self):
         return self.file.readline().strip()

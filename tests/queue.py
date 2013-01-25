@@ -91,12 +91,40 @@ class QueueTest(unittest.TestCase):
         queue.append(thing)
         self.assertEqual(queue.bottom(), queue.top())
 
+    def test_size_empty_new_file(self):
+        q = Queue('test', 'files/test9.clbr')
+        self.assertEqual(0, q.size())
+
+    def test_size_existing_file(self):
+        q = Queue('test', 'files/test.clbr')
+        self.assertEqual(5, q.size())
+
+    def test_size_new_file(self):
+        q = Queue('test', 'files/test11.clbr')
+        things = ['hola', 'como', 'estas', 'ciao']
+        for t in things:
+            q.append(t)
+        self.assertEqual(5, q.size())
+
+    def test_flush_new_file(self):
+        q = Queue('test', 'files/test10.clbr')
+        things = []
+        for i in xrange(0, 5):
+            things.append(str(random.random()))
+        for t in things:
+            q.append(t)
+            self.assertEqual(t, q.bottom())
+        # Refactor with size and stuff
+        q.flush()
+        self.assertEqual('', q.top())
+        self.assertEqual('', q.bottom())
+        self.assertEqual(0, q.size())
 
     @classmethod
     def tearDownClass(cls):
         # Only the 'new' related files
         filenames = ['test2', 'test3', 'test4', 'test5', 'test6', 'test7',
-                     'test8']
+                     'test8', 'test9', 'test10', 'test11']
         ext = '.clbr'
         root = 'files'
         paths = [os.path.join(root, fn + ext) for fn in filenames]
