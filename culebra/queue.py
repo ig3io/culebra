@@ -32,7 +32,7 @@ class Queue(object):
         return self.file.readlines()[-1].strip()
 
     def _append(self, text):
-        return self.file.write('\n' + text)
+        return self.file.write(text + '\n')
 
     def _openf(self, mode='r'):
         self.file = open(self.path, mode)
