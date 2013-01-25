@@ -73,10 +73,30 @@ class QueueTest(unittest.TestCase):
         queue.append(thing)
         self.assertEqual(thing, queue.bottom())
 
+    def test_empty_top_new_file(self):
+        queue = Queue('test', 'files/test5.clbr')
+        self.assertEqual('', queue.top())
+
+    def test_empty_bottom_new_file(self):
+        queue = Queue('test', 'files/test6.clbr')
+        self.assertEqual('', queue.bottom())
+
+    def test_bottom_equals_top_empty_new_file(self):
+        queue = Queue('test', 'files/test7.clbr')
+        self.assertEqual(queue.bottom(), queue.top())
+
+    def test_bottom_equals_top_new_file(self):
+        queue = Queue('test', 'files/test8.clbr')
+        thing = str(random.random())
+        queue.append(thing)
+        self.assertEqual(queue.bottom(), queue.top())
+
+
     @classmethod
     def tearDownClass(cls):
         # Only the 'new' related files
-        filenames = ['test2', 'test3', 'test4']
+        filenames = ['test2', 'test3', 'test4', 'test5', 'test6', 'test7',
+                     'test8']
         ext = '.clbr'
         root = 'files'
         paths = [os.path.join(root, fn + ext) for fn in filenames]

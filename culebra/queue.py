@@ -14,6 +14,9 @@ class Queue(object):
     def append(self, elem):
         return self._dof(self._append, 'a', str(elem))
 
+    def flush(self, elem):
+        raise NotImplementedError()
+
     def __iter__(self):
         self._openf()
         for line in self.file.readlines():
