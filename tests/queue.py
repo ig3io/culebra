@@ -81,7 +81,10 @@ class QueueTest(unittest.TestCase):
         root = 'files'
         paths = [os.path.join(root, fn + ext) for fn in filenames]
         for p in paths:
-            os.remove(p)
+            try:
+                os.remove(p)
+            except IOError:
+                pass
 
 if __name__ == '__main__':
     unittest.main()

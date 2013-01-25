@@ -3,6 +3,7 @@ class Queue(object):
         self.name = name
         self.path = path
         self.file = None
+        self._dof(self._init, 'a')
 
     def top(self):
         return self._dof(self._top)
@@ -25,11 +26,18 @@ class Queue(object):
         self._closef()
         return result
 
+    def _init(self):
+        return None
+
     def _top(self):
         return self.file.readline().strip()
 
     def _bottom(self):
-        return self.file.readlines()[-1].strip()
+        lines = self.file.readlines()
+        if not lines:
+            return ''
+        else:
+            return lines[-1].strip()
 
     def _append(self, text):
         return self.file.write(text + '\n')
