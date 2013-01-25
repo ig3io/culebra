@@ -11,7 +11,7 @@ class Queue(object):
         return self._dof(self._bottom)
 
     def append(self, elem):
-        return self._dof(self._append, 'ab', str(elem))
+        return self._dof(self._append, 'a', str(elem))
 
     def __iter__(self):
         self._openf()
