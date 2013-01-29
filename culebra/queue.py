@@ -18,7 +18,17 @@ class Queue(object):
         return self._dof(self._append, 'a', str(elem))
 
     def flush(self):
-        self._dof(self._init, 'w')
+        return self._dof(self._init, 'w')
+
+    def remove(self, elem):
+        lines = []
+        text = elem.strip()
+        for ln in self:
+            if text != ln.strip():
+                lines.append(ln)
+        self.flush()
+        for ln in lines:
+            self.append(ln.strip())
 
     def __iter__(self):
         self._openf()
