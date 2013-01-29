@@ -46,7 +46,7 @@ class Queue(object):
         return None
 
     def _size(self):
-        return len(self.file.readline())
+        return len(self.file.readlines())
 
     def _top(self):
         return self.file.readline().strip()
