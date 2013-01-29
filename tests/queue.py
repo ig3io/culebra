@@ -121,7 +121,7 @@ class QueueTest(unittest.TestCase):
         self.assertEqual(0, q.size())
 
     def test_remove_has_effect(self):
-        q = Queue('test', 'remove_has_effect.clbr')
+        q = Queue('test', 'files/remove_has_effect.clbr')
         elements = ['hola', 'como', 'estas', 'loco']
         for e in elements:
             q.append(e)
