@@ -97,14 +97,14 @@ class QueueTest(unittest.TestCase):
 
     def test_size_existing_file(self):
         q = Queue('test', 'files/test.clbr')
-        self.assertEqual(5, q.size())
+        self.assertEqual(4, q.size())
 
     def test_size_new_file(self):
         q = Queue('test', 'files/test11.clbr')
         things = ['hola', 'como', 'estas', 'ciao']
         for t in things:
             q.append(t)
-        self.assertEqual(5, q.size())
+        self.assertEqual(4, q.size())
 
     def test_flush_new_file(self):
         q = Queue('test', 'files/test10.clbr')
