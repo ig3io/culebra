@@ -120,18 +120,30 @@ class QueueTest(unittest.TestCase):
         self.assertEqual('', q.bottom())
         self.assertEqual(0, q.size())
 
+    def test_remove_has_effect(self):
+        q = Queue('test', 'remove_has_effect.clbr')
+        elements = ['hola', 'como', 'estas', 'loco']
+        for e in elements:
+            q.append(e)
+        q.remove('como')
+        for e in elements:
+            if e == 'como':
+                self.assertFalse(e in q)
+            else:
+                self.assertTrue(e in q)
+
     @classmethod
     def tearDownClass(cls):
         # Only the 'new' related files
         filenames = ['test2', 'test3', 'test4', 'test5', 'test6', 'test7',
-                     'test8', 'test9', 'test10', 'test11']
+                     'test8', 'test9', 'test10', 'test11', 'remove_has_effect']
         ext = '.clbr'
         root = 'files'
         paths = [os.path.join(root, fn + ext) for fn in filenames]
         for p in paths:
             try:
                 os.remove(p)
-            except IOError:
+            except (IOError, WindowsError):
                 pass
 
 if __name__ == '__main__':
